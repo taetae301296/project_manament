@@ -1,0 +1,44 @@
+.logo,
+.logo:focus{
+    font-family: 'Aguafina Script', cursive;
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(163, 47, 47);
+
+    transition: all 0.5;
+}
+
+.logo:hover,
+.logo:active{
+    color: rgb(189, 37, 37);
+}
+
+.menu{
+    background-color:  rgba(38,57,85, 0.9);
+}
+
+.navbar-nav {
+    a{
+        color: #bd9995;
+        font-weight: 600;
+        margin-left: 30px;
+        padding: 3px 0;
+
+        transition: 0.5s;
+    }
+
+    a:hover,
+    a:active{
+        border-bottom: 2px solid #bd9995;
+        color: #bd9995;
+    }
+}
+
+.active_class{
+    color: #c2564c;
+    border-bottom: 2px solid #bd9995;
+}
+
+.modal-header{
+    margin: 20px 0px 20px 34px;
+}

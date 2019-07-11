@@ -1,0 +1,20 @@
+.row{
+    padding-top: 90px;
+}
+
+.card-header{
+    font-size: 20px;
+    font-weight: 700;
+    background: rgb(67,102,135); 
+    color: white;
+}
+
+.btn{
+    width: 100%;
+    background:  rgb(185,101,93);;
+    color: white;
+}
+
+.create-acc{
+    text-align: right;
+}

@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-4 col-sm-8 offset-sm-2">
+            <div class="card card-default">
+                <div class="card-header">Sign In</div>
+                <div class="card-body" style="border-radius: 5px">
+                    <form [formGroup]="formGroup" class="form-horizontal" (ngSubmit)="onSubmit()">
+                        
+                        <div class="form-group">
+                            <div>
+                                <input formControlName="email" type="email" name="email" class="form-control"
+                                    placeholder="E-maiil">
+                                <div *ngIf="formGroup.controls['email'].errors">
+                                    <small class="text-danger" *ngIf="formGroup.controls['email'].errors.required">Email
+                                        is required</small>
+                                    <small class="text-danger" *ngIf="formGroup.controls['email'].errors.pattern">Email
+                                        is not match</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div>
+                                <input formControlName="password" type="password" name="password" class="form-control"
+                                    placeholder="Password">
+                                <div *ngIf="formGroup.controls['password'].errors">
+                                    <small class="text-danger" *ngIf="formGroup.controls['password'].errors.required"
+                                    >Password is required</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label style="color: black">
+                                    <input type="checkbox" name="remember"> Remember Me
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" [disabled]="!formGroup.valid" class="btn" value="Login">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

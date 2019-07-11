@@ -1,0 +1,236 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="mr-auto">
+                            <a class="mb-3 ml-3 btn create" data-toggle="modal" data-target="#addDepartment"
+                                (click)="getId(0)" href="#">
+                                Create Department
+                            </a>
+                        </div>
+                        <div class="form-inline">
+                            <input class="form-control mb-3 mr-3" type="search" placeholder="Search..."
+                                aria-label="Search" id="myInput">
+                        </div>
+
+                        <!-- T?o modal thêm Department-->
+                        <div class="modal fade" id="addDepartment" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+
+                                    <div class="modal-header modal_create">
+                                        <h5 class="modal-title" id="exampleModalLabel">Form Department</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+                                            <div class="form-group">
+                                                <label>Department Code</label>
+                                                <input type="text" class="form-control" formControlName="departmentCode"
+                                                    value="departmentCode">
+                                                <div *ngIf="formGroup.controls['departmentCode'].errors">
+                                                    <small class="text-danger"
+                                                        *ngIf="formGroup.controls['departmentCode'].errors.required">*
+                                                    </small>
+                                                    <small class="text-danger"
+                                                        *ngIf="formGroup.controls['departmentCode'].errors.pattern">
+                                                        No special characters
+                                                    </small>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="username" class="col-form-label">Department Name</label>
+                                                <input type="text" class="form-control" formControlName="departmentName"
+                                                    name="departmentName">
+                                                <div *ngIf="formGroup.controls['departmentName'].errors">
+                                                    <small class="text-danger"
+                                                        *ngIf="formGroup.controls['departmentName'].errors.required">*
+                                                    </small>
+                                                </div>
+                                            </div>
+
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                style="margin-right: 20px;">
+                                                Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- T?o modal Xóa department-->
+                        <div class="modal fade" id="deleteDepartment">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header modal_delete">
+                                        <h3 class="modal-title">Delete Department</h3>
+                                        <button type="button" class="close" aria-label="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <p>Delete department {{departmentRemove?.departmentName}} </p>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="deleteDepartment(departmentRemove?.departmentId)">Delete</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tạo modal table Project -->
+                        <div class="modal fade" id="listProject">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header modal_list">
+                                        <h3 class="modal-title">List Project</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-sm" style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Project name</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr *ngFor="let item of projects">
+                                                        <td>{{item?.projectId}}</td>
+                                                        <td>{{item?.projectName}}</td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tạo modal table Employee -->
+                        <div class="modal fade" id="listEmployee">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header modal_list">
+                                        <h3 class="modal-title">List Employee</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-sm" style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Fullname</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr *ngFor="let item of employees">
+                                                        <td>{{item?.employeeId}}</td>
+                                                        <td>{{item?.firstName}} {{item?.lastName}}</td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Tạo table -->
+                        <div class="table-responsive table">
+                            <table class="maintable table-hover table-sm table-fixed" id="table-department">
+
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Department Code</th>
+                                        <th>Department Name</th>
+                                        <th>Created Date</th>
+                                        <th>Updated Date</th>
+                                        <th>Created By</th>
+                                        <th>Projects</th>
+                                        <th>Employees</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="myTable">
+                                    <tr *ngFor="let item of departments">
+                                        <td>{{item.departmentId}}</td>
+                                        <td>{{item.departmentCode}}</td>
+                                        <td>{{item.departmentName}}</td>
+                                        <td>{{item.createdDate | date }}</td>
+                                        <td>{{item.updatedDate | date }}</td>
+                                        <td>{{item?.CreatedBy?.username}}</td>
+                                        <td>
+                                            <button class="btn btn-warning" (click)="getDepartmentById(item.departmentId)"
+                                            data-toggle="modal" data-target="#listProject"><i class="fas fa-project-diagram"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success" (click)="getDepartmentById(item.departmentId)"
+                                            data-toggle="modal" data-target="#listEmployee"><i class="fa fa-users"></i></button>
+                                        </td>
+                                        <td class="icon">
+                                            <button class="m-1 icon_tool" data-toggle="modal"
+                                                data-target="#addDepartment" (click)="getId(item.departmentId)">
+                                                <i class="fas fa-tools"></i>
+                                            </button>
+                                            <button class="icon_trash" data-toggle="modal"
+                                                data-target="#deleteDepartment" (click)="delete(item)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

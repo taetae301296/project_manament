@@ -2,11 +2,16 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-shared',
+  template: `
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+  `,
 })
-export class AppComponent {
+
+
+export class SharedComponent {
   title = 'project1';
 
   constructor(private http:HttpClient){

@@ -1,0 +1,48 @@
+<div class="modal fade" id="modalProfile">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <img src="{{avatar}}" style="width: 200px; height: 200px;" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+
+      <div class="modal-body text-center mb-1">
+        <h5 class="mt-1 mb-2">{{firstName}} {{lastName}}</h5>
+        <div class="md-form ml-0 mr-0">
+          <p>{{email}}</p>
+        </div>
+        <div class="text-center mt-4">
+          <button class="btn btn-danger mt-1" data-dismiss="modal">Cancel<i class="fas fa-sign-in ml-1"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<nav class="navbar navbar-expand-sm fixed-top navbar-light menu" >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu_x" aria-controls="menu_x"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand logo" href="#">ProjectManament</a>
+  <div class="navbar-collapse collapse" id="menu_x">
+    <div class="navbar-nav">
+      <ul class="nav navbar-nav">
+        <li><a [routerLink]="['/employees']" routerLinkActive="active_class" class="nav-item nav-link">Employees<span
+              class="sr-only">(current)</span></a></li>
+        <li><a [routerLink]="['/departments']" routerLinkActive="active_class" class="nav-item nav-link">Department</a>
+        </li>
+        <li><a [routerLink]="['/projects']" routerLinkActive="active_class" class="nav-item nav-link">Project</a></li>
+        <li><a [routerLink]="['/sprints']" routerLinkActive="active_class" class="nav-item nav-link">Sprint</a></li>
+        <li><a [routerLink]="['/tasks']" routerLinkActive="active_class" class="nav-item nav-link">Task</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="my-2 my-lg-0">
+    <button [routerLink]="['/auth']" class="btn btn-outline-danger my-2 my-sm-0 mr-2">Logout</button>
+    <a class="btn-warning btn-sm ml-3" data-toggle="modal" data-target="#modalProfile"><i class="fas fa-user-circle"></i> </a>
+  </div>
+</nav>

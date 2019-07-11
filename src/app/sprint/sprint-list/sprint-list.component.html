@@ -1,0 +1,207 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+
+        <div class="card-body">
+          <div class="row">
+
+            <div class="mr-auto">
+              <a class="mb-3 ml-3 btn create" data-toggle="modal" data-target="#addSprint" (click)="getId(0)" href="#">
+                Create Sprint
+              </a>
+            </div>
+
+            <div class="form-inline">
+              <input class="form-control mb-3 mr-3" type="search" placeholder="Search..." aria-label="Search"
+                id="myInput">
+            </div>
+
+            <!-- T?o modal thêm Sprint-->
+            <div class="modal fade" id="addSprint" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                  <div class="modal-header modal_create">
+                    <h5 class="modal-title">Form Sprint</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+                      <div class="form-group">
+                        <label for="sprintName" class="col-form-label">Sprint Name</label>
+                        <input type="text" class="form-control" formControlName="sprintName" name="sprintName"
+                          id="sprintName">
+                        <div *ngIf="formGroup.controls['sprintName'].errors">
+                          <small class="text-danger" *ngIf="formGroup.controls['sprintName'].errors.required"> *
+                          </small>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="startDate" class="col-form-label">Start Date</label>
+                        <input type="date" class="form-control" formControlName="startDate" name="startDate"
+                          id="startDate">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="endDate" class="col-form-label">End Date</label>
+                        <input type="date" class="form-control" formControlName="endDate" name="endDate" id="endDate">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="status" class="col-form-label">Status</label>
+                        <select class="form-control" formControlName="status" id="status">
+                          <option value="Opened" selected="Opened">Opened</option>
+                          <option value="In Progress" selected="InProgress">In Progress</option>
+                          <option value="In Review" selected="InReview">In Review</option>
+                          <option value="QA" selected="QA">QA</option>
+                          <option value="Closed" selected="Closed">Closed</option>
+                        </select>
+                        <div *ngIf="formGroup.controls['status'].errors">
+                          <small class="text-danger" *ngIf="formGroup.controls['status'].errors.required">*</small>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="projectId" class="col-form-label">Project name</label>
+                        <select class="form-control" formControlName="projectId" id="projectId">
+                          <option [value]="item.projectId" *ngFor="let item of projects" [selected]="item.projectId">
+                            {{item.projectName}}</option>
+                        </select>
+                        <div *ngIf="formGroup.controls['projectId'].errors">
+                          <small class="text-danger" *ngIf="formGroup.controls['projectId'].errors.required">*</small>
+                        </div>
+                      </div>
+
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        style="margin-right: 20px;">Close</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- T?o modal Xóa employee-->
+            <div class="modal fade" id="deleteSprint">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <div class="modal-header modal_delete">
+                    <h3 class="modal-title">Delete project</h3>
+                    <button type="button" class="close" aria-label="close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <p>Delete sprint {{sprintRemove?.sprintName}} </p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                      (click)="deleteSprint(sprintRemove.sprintId)">Delete</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Tạo modal table Task -->
+            <div class="modal fade" id="listTask">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <div class="modal-header modal_list">
+                    <h3 class="modal-title">List Task</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                      <table class="table table-hover table-sm" style="width: 100%">
+                        <thead>
+                          <tr>
+                            <th>Id</th>
+                            <th>Task name</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr *ngFor="let item of tasks">
+                            <td>{{item?.taskId}}</td>
+                            <td>{{item?.taskName}}</td>
+                          </tr>
+                        </tbody>
+
+                      </table>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Tạo table -->
+            <div class="table-responsive table">
+              <table class="maintable table-hover table-sm table-fixed" id="table-sprint">
+
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Sprint Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Created Date</th>
+                    <th>Updated Date</th>
+                    <th>Project Name</th>
+                    <th>Task</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody id="myTable">
+                  <tr *ngFor="let item of sprints">
+                    <td>{{item.sprintId}}</td>
+                    <td>{{item.sprintName}}</td>
+                    <td>{{item.startDate | date }}</td>
+                    <td>{{item.endDate | date }}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.createdDate | date }}</td>
+                    <td>{{item.updatedDate | date }}</td>
+                    <td>{{item?.project?.projectName}}</td>
+                    <td>
+                      <button class="btn btn-info" (click)="getSprintById(item.sprintId)" data-toggle="modal"
+                        data-target="#listTask"><i class="fas fa-tasks"></i></button>
+                    </td>
+                    <td class="icon">
+                      <button class="m-1 icon_tool" *ngIf="isHideEdit" data-toggle="modal" data-target="#addSprint"><i class="fas fa-tools"
+                          (click)="getId(item.sprintId)"></i></button>
+                      <button *ngIf="isHideDelete" class="icon_trash" data-toggle="modal" data-target="#deleteSprint"
+                        (click)="delete(item)"><i class="fas fa-trash"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

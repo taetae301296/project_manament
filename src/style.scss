@@ -1,0 +1,126 @@
+*{
+    font-size: 12.5px;
+    letter-spacing: 0.5px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    color: red;
+}
+
+.container-fluid{
+    margin-top: 64px;
+    background: rgb(247, 250, 250);
+}
+
+.card-body{
+    background: rgb(247, 250, 250);
+
+    a,
+    a:hover{
+        color: white;
+    }
+}
+
+.modal_create{
+    background-color: #436687;
+    color: white;
+}
+
+.modal_delete{
+    background-color:  #a13228;
+    color: white;
+}
+
+.modal_list{
+    background-color:  #d9c3b0;
+    color: white;
+}
+
+// .maintable{
+//     height: 438px;
+//     overflow-y: scroll;
+//     overflow-x: scroll;
+//     width: 1520px;
+// }
+
+// .card-header{
+//     text-align: center;
+// }
+
+.create{
+    background-color: rgb(185,101,93);
+    transition: all 0.3s;
+}
+
+.create:hover,
+.create:active{
+    /* background-color: rgb(185,101,93); */
+    transform: scale(1.1);
+}
+
+table{
+    background: white;
+    width: 100%;
+}
+
+button{
+    border: 0;
+}
+
+.icon{
+    .icon_tool{
+        background: #263955;
+        border-radius: 2px;
+    }
+
+    i{
+        color: white;
+    }
+
+    .icon_trash{
+        background: #b9655d;
+        border-radius: 2px;
+    }
+}
+
+// .modal-content{
+//     background-color: rgba(67,102,135, 0.8);
+//     color: white;
+// }
+
+.table-fixed{
+    width: 100%;
+    // table-layout: fixed;
+    border-collapse: collapse;
+
+    tbody{
+        display:block;
+        width: 100%;
+        overflow: auto;
+        height: 430px;
+    }
+
+    thead{
+        background: #436687;
+        color:#fff;
+        tr{
+            display: block;
+        }
+    }
+
+    th{
+        padding: 10px;
+        text-align: left;
+        width: 200px;
+    }
+
+    td{
+        padding: 5px;
+        text-align: left;
+        width: 200px;
+    }
+}

@@ -1,0 +1,13 @@
+footer{
+    background-color: #c6caca;
+}
+
+a{
+    color: #e6675c;
+    text-decoration: none;
+}
+
+a:hover,
+a:active{
+    color: #c2564c;
+}

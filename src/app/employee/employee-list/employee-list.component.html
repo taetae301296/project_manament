@@ -1,0 +1,228 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+
+        <div class="card-body">
+          <div class="row">
+
+            <div class="mr-auto">
+              <a class="mb-3 ml-3 btn create" data-toggle="modal" data-target="#addEmployee" (click)="getId(0)" href="#">
+                Create Employee
+              </a>
+            </div>
+            
+            <div class="form-inline">
+              <input class="form-control mb-3 mr-3" type="search" placeholder="Search..." aria-label="Search"
+                id="myInput">
+            </div>
+
+            <!-- T?o modal thêm employee-->
+            <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                  <div class="modal-header modal_create">
+                    <h5 class="modal-title">Form Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+                      <div class="form-group">
+                        <label for="username" class="col-form-label">User name</label>
+                        <input type="text" class="form-control" formControlName="username" name="username"
+                          id="username">
+                        <div *ngIf="formGroup.controls['username'].errors">
+                          <small class="text-danger" *ngIf="formGroup.controls['username'].errors.required">
+                            *
+                          </small>
+                          <small class="text-danger" *ngIf="formGroup.controls['username'].errors.pattern">
+                            Use your email
+                          </small>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-form-label" for="password">Password</label>
+                        <input type="password" class="form-control" formControlName="password" name="password"
+                          required maxLength="100" id="password">
+                        <div *ngIf="formGroup.controls['password'].errors">
+                           <small class="text-danger" *ngIf="formGroup.controls['password'].errors.required">*</small>
+                           <small class="text-danger" *ngIf="formGroup.controls['password'].errors.maxLength">
+                            Password must be less than 100
+                          </small>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="firstName" class="col-form-label">First Name</label>
+                        <input type="text" class="form-control" formControlName="firstName" name="firstName"
+                          required maxLength="50" id="firstName">
+                        <div *ngIf="formGroup.controls['firstName'].errors">
+                          <small class="text-danger" *ngIf="formGroup.controls['firstName'].errors.required">*</small>
+                          <small class="text-danger" *ngIf="formGroup.controls['firstName'].errors.maxLength">
+                            First name must be less than 50
+                          </small>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="lastName" class="col-form-label">Last Name</label>
+                        <input type="text" class="form-control" formControlName="lastName" name="lastName"
+                          required maxLength="50" id="lastName">
+                        <div *ngIf="formGroup.controls['lastName'].errors">
+                          <small class="text-danger" *ngIf="formGroup.controls['lastName'].errors.required">*</small>
+                          <small class="text-danger" *ngIf="formGroup.controls['lastName'].errors.maxLength">
+                            Last name must be less than 50
+                          </small>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="email" class="col-form-label">Email</label>
+                        <input type="text" class="form-control" formControlName="email" name="email" id="email">
+                        <div *ngIf="formGroup.controls['email'].errors">
+                          <small class="text-danger" *ngIf="formGroup.controls['email'].errors.required">
+                            *
+                          </small>
+                          <small class="text-danger" *ngIf="formGroup.controls['email'].errors.pattern">
+                            Use your email
+                          </small>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="avatar" class="col-form-label">Avatar</label>
+                        <input type="text" class="form-control" formControlName="avatar" name="avatar" id="avatar">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="phone" class="col-form-label">Phone</label>
+                        <input type="text" class="form-control" formControlName="phone" name="phone" id="phone">
+                        <div *ngIf="formGroup.controls['phone'].errors">
+                          <small class="text-danger" *ngIf="formGroup.controls['phone'].errors.required">
+                            *
+                          </small>
+                          <small class="text-danger" *ngIf="formGroup.controls['phone'].errors.pattern">
+                            Phone is not match
+                          </small>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="roleId" class="col-form-label">Role Id</label>
+                        <select class="form-control" formControlName="roleId" id="roleId">
+                          <option [value]="item.roleId" *ngFor="let item of roles"
+                            [selected]="item.roleId">{{item.roleName}}</option>
+                        </select>
+                        <div *ngIf="formGroup.controls['roleId'].errors">
+                          <small class="text-danger" *ngIf="formGroup.controls['roleId'].errors.required">*</small>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="departmentId" class="col-form-label">Department Id</label>
+                        <select class="form-control" formControlName="departmentId" id="departmentId">
+                          <option [value]="item.departmentId" *ngFor="let item of departments"
+                            [selected]="item.departmentId">{{item.departmentName}}</option>
+                        </select>
+                        <div *ngIf="formGroup.controls['departmentId'].errors">
+                          <small class="text-danger"
+                            *ngIf="formGroup.controls['departmentId'].errors.required">*</small>
+                        </div>
+                      </div>
+
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        style="margin-right: 20px;">Close</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- T?o modal Xóa employee-->
+            <div class="modal fade" id="deleteEmployee">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <div class="modal-header modal_delete">
+                    <h3 class="modal-title">Delete Employee</h3>
+                    <button type="button" class="close" aria-label="close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body">
+                    <p>Delete employee {{employeeRemove?.firstName}} {{employeeRemove?.lastName}} </p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                      (click)="deleteEmployee(employeeRemove.employeeId)">Delete</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- T?o table -->
+            <div class="table-responsive table">
+              <table class="maintable table-hover table-sm table-fixed" id="table-employee">
+
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Fullname</th>
+                    <!-- <th>Username</th> -->
+                    <th>Email</th>
+                    <th>Avatar</th>
+                    <th >Phonenumber</th>
+                    <th>Created date</th>
+                    <th>Updated date</th>
+                    <th>Created By</th>
+                    <th>Role name</th>
+                    <th>Department name</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                
+                <tbody id="myTable">
+                  <tr *ngFor="let item of employees">
+                    <td>{{item.employeeId}}</td>
+                    <td>{{item.firstName}} {{item.lastName}}</td>
+                    <!-- <td>{{item.username}}</td> -->
+                    <td>{{item.email}}</td>
+                    <td>
+                      <img style="width: 30px; height: 40px;" src="{{item?.avatar}}" alt="...">
+                    </td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.createdDate | date }}</td>
+                    <td>{{item.updatedDate | date }}</td>
+                    <td>{{item?.CreatedBy?.username}}</td>
+                    <td>{{item?.role?.roleName}}</td>
+                    <td>{{item?.department?.departmentName}}</td>
+                    <td class="icon">
+                      <button class="m-1 icon_tool" data-toggle="modal" data-target="#addEmployee" (click)="getId(item.employeeId)">
+                        <i class="fas fa-tools"></i>
+                      </button>
+                      <button class="icon_trash" data-toggle="modal" data-target="#deleteEmployee" (click)="delete(item)">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
